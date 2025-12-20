@@ -17,6 +17,7 @@
             --card: #181a1d;
             --text: #ffffff;
             --text-dim: #94a3b8;
+            --discord: #5865F2;
         }
 
         * {
@@ -61,9 +62,12 @@
         .logo img { height: 35px; width: auto; }
         .logo span { color: var(--primary); }
 
-        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav ul { display: flex; list-style: none; gap: 25px; align-items: center; }
         nav ul a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
         nav ul a:hover { color: var(--primary); }
+
+        /* Külön stílus a Discord gombnak */
+        .discord-link:hover { color: var(--discord) !important; }
 
         .nav-dl-btn {
             background: var(--primary);
@@ -255,6 +259,8 @@
             <li><a href="#galeria">Képek</a></li>
             <li><a href="#tech">Specifikáció</a></li>
             <li><a href="#gyik">GYIK</a></li>
+            <li><a href="https://discord.gg/MEGHIVO_LINK" target="_blank" class="discord-link"><i class="fab fa-discord"></i> Discord</a></li>
+            <li><a href="aszf.html">ÁSZF</a></li>
             <li><a href="#" class="nav-dl-btn">LETÖLTÉS</a></li>
         </ul>
     </nav>
@@ -350,4 +356,3 @@
 
 </body>
 </html>
-
