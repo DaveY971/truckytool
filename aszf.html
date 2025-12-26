@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruckyTool – ÁSZF</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        :root {
+            --primary: #52ceca;
+            --primary-glow: rgba(82, 206, 202, 0.3);
+            --bg: #0b0e11;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(82, 206, 202, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(88, 101, 242, 0.05) 0%, transparent 40%);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 8%;
+            background: rgba(11, 14, 17, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            position: fixed;
+            width: 94%;
+            left: 3%;
+            top: 15px;
+            z-index: 1000;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+        }
+        .logo span { color: var(--primary); }
+
+        .back-btn {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .back-btn:hover { color: var(--primary); }
+
+        .container {
+            max-width: 900px;
+            margin: 140px auto 80px;
+            padding: 60px;
+            background: var(--glass-bg);
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .update-date {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin: 40px 0 20px;
+            font-weight: 700;
+            border-left: 3px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-dim);
+        }
+
+        .disclaimer-box {
+            background: rgba(255, 50, 50, 0.05);
+            border: 1px solid rgba(255, 50, 50, 0.15);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 25px 0;
+        }
+
+        .disclaimer-box p {
+            color: #ff9999;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-dim);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .container { margin: 100px 5% 40px; padding: 30px; border-radius: 25px; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="truckytool.html" class="logo">
+            Trucky<span>Tool</span>
+        </a>
+        <a href="truckytool.html" class="back-btn"><i class="fas fa-arrow-left"></i> Vissza a főoldalra</a>
+    </nav>
+
+    <div class="container">
+        <h1>ÁLTALÁNOS SZERZŐDÉSI FELTÉTELEK ÉS LICENCSZERZŐDÉS (v1.1.8)</h1>
+        <div class="update-date">Utolsó frissítés: 2025.12.20</div>
+
+        <p>A TruckyTool (a továbbiakban: Szoftver) letöltésével, telepítésével vagy használatával Ön (a továbbiakban: Felhasználó) elfogadja az alábbi feltételeket. Amennyiben nem ért egyet a feltételekkel, kérjük, ne használja a Szoftvert.</p>
+
+        <h2>1. A Licenc tárgya</h2>
+        <p>A fejlesztő nem kizárólagos, át nem ruházható licencet biztosít a Felhasználó számára a Szoftver magáncélú, ingyenes használatára. A Szoftver minden szellemi tulajdonjoga a fejlesztőt illeti.</p>
+
+        <h2>2. Felelősség kizárása (Disclaimer)</h2>
+        <div class="disclaimer-box">
+            <p><strong>"Ahogy van":</strong> A Szoftver jelenlegi állapotában érhető el. A fejlesztő nem garantálja a Szoftver hiba- és zavarmentes működését minden hardver- és szoftverkörnyezetben.</p>
+            <p><strong>Játékbeli adatok:</strong> A Szoftver az Euro Truck Simulator 2 fájljaival interaktálhat. A fejlesztő nem vállal felelősséget a játékprofilok sérüléséért, adatok törlődéséért vagy a játékmenetben bekövetkező bármilyen nem kívánt módosulásért. A mentések rendszeres archiválása a Felhasználó kötelessége.</p>
+        </div>
+        <p><strong>Hivatalos kapcsolat:</strong> A TruckyTool egy független projekt. Nem áll kapcsolatban az SCS Software-rel, és nem minősül hivatalos kiegészítőnek.</p>
+
+        <h2>3. Technikai és Biztonsági nyilatkozat</h2>
+        <p><strong>Digitális aláírás hiánya:</strong> A Felhasználó tudomásul veszi, hogy a Szoftver nem rendelkezik Microsoft Windows digitális aláírással. Emiatt a Windows SmartScreen vagy egyéb antivírus szoftverek "Ismeretlen forrásból származó" vagy "Potenciálisan veszélyes" jelzést adhatnak. Ezek téves pozitív riasztások, melyek a fejlesztési környezet sajátosságaiból adódnak. A Szoftver kártékony kódot nem tartalmaz.</p>
+        <p><strong>Futtatás:</strong> A Szoftver futtatása a Felhasználó kifejezett hozzájárulásával és saját felelősségére történik.</p>
+
+        <h2>4. Felhasználói korlátozások</h2>
+        <p>A Felhasználó számára TILOS:</p>
+        <ul>
+            <li>A Szoftver forráskódjának visszafejtése, módosítása vagy feltörése.</li>
+            <li>A Szoftver vagy annak bármely részének értékesítése, bérbeadása vagy anyagi haszonszerzés céljából történő terjesztése.</li>
+            <li>A Szoftver nevében történő megtévesztő kommunikáció vagy a fejlesztőként való feltüntetés.</li>
+        </ul>
+
+        <h2>5. Adatkezelés és Magánélet</h2>
+        <p><strong>Helyi tárolás:</strong> A TruckyTool az összes adatot (fuvarstatisztika, flottakezelés, profilok) helyileg, a Felhasználó eszközén tárolja (JSON formátumban).</p>
+        <p><strong>Adattovábbítás:</strong> A Szoftver nem gyűjt és nem továbbít személyes adatokat. Külső hálózati kommunikációt kizárólag a MEGA.nz tárhelyről történő letöltéskor vagy manuális frissítés-ellenőrzéskor végezhet.</p>
+
+        <h2>6. Külső szolgáltatások</h2>
+        <p>A Szoftver letöltése a MEGA.nz platformon keresztül történik. A MEGA szolgáltatásaiból adódó esetleges szerverhibákért vagy a szolgáltató adatkezeléséért a TruckyTool fejlesztője nem felelős.</p>
+
+        <h2>7. A feltételek módosítása</h2>
+        <p>A fejlesztő fenntartja a jogot, hogy bármikor módosítsa a jelen ÁSZF-et. A módosítások a Discord szerveren vagy a weboldalon való közzététellel lépnek hatályba.</p>
+    </div>
+
+    <footer>
+        &copy; 2025-2026 TruckyTool Team. Minden jog fenntartva.
+    </footer>
+
+</body>
+</html>

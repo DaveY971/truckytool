@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruckyTool v1.1.8 – ETS2</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        :root {
+            --primary: #52ceca;
+            --primary-glow: rgba(82, 206, 202, 0.3);
+            --bg: #0b0e11;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.07);
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --discord: #5865F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(82, 206, 202, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(88, 101, 242, 0.05) 0%, transparent 40%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigáció - Teljesen Reszponzív */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 5%;
+            background: rgba(11, 14, 17, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: fixed;
+            width: 94%;
+            left: 3%;
+            top: 15px;
+            z-index: 1000;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+		
+		.discord-link:hover { color: var(--discord) !important; }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .logo span { color: var(--primary); }
+        .logo img { height: 28px; width: auto; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .nav-dl-btn {
+            background: var(--primary);
+            color: #000 !important;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700 !important;
+            transition: 0.3s;
+        }
+
+        .nav-dl-btn:hover { background: #fff; transform: translateY(-2px); }
+
+        /* Hero */
+        .hero-container {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 5% 60px;
+            overflow: hidden;
+        }
+
+        @keyframes blurOnScroll {
+            from { filter: brightness(0.7) blur(0px); }
+            to { filter: brightness(0.7) blur(12px); }
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 120%;
+            background: linear-gradient(rgba(11,14,17,0.3), #0b0e11), url('background.png') no-repeat center center/cover;
+            z-index: -1;
+            filter: brightness(0.7);
+            animation: blurOnScroll linear both;
+            animation-timeline: scroll(root);
+            animation-range: 0px 800px;
+        }
+
+        .hero-badge {
+            background: rgba(82, 206, 202, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            border: 1px solid rgba(82, 206, 202, 0.3);
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            line-height: 1.3;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header h1 span { 
+            background: linear-gradient(135deg, var(--primary), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            max-width: 650px;
+            color: var(--text-dim);
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            margin-bottom: 45px;
+        }
+
+        .cta-btn {
+            background: var(--primary);
+            color: #000;
+            padding: 20px 40px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+            box-shadow: 0 20px 40px -10px var(--primary-glow);
+        }
+
+        .cta-btn:hover { transform: translateY(-5px); background: #fff; }
+
+        /* Szekciók */
+        .container { padding: 100px 5%; width: 100%; max-width: 1200px; margin: 0 auto; }
+        h2.section-title { text-align: center; margin-bottom: 60px; font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; }
+
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .f-card {
+            background: var(--glass-bg);
+            padding: 50px 40px;
+            border-radius: 35px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: 0.4s;
+        }
+
+        .f-card:hover { border-color: var(--primary); transform: translateY(-10px); background: var(--glass-hover); }
+
+        .icon-box {
+            width: 60px; height: 60px;
+            background: rgba(82, 206, 202, 0.1);
+            color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 20px; margin-bottom: 30px; font-size: 1.5rem;
+            border: 1px solid rgba(82, 206, 202, 0.2);
+        }
+
+        .f-card h3 { margin-bottom: 15px; font-size: 1.3rem; }
+
+        /* Galéria */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-grid div {
+            border-radius: 25px; overflow: hidden;
+            border: 1px solid var(--glass-border); aspect-ratio: 16/9;
+            transition: 0.5s;
+        }
+
+        .gallery-grid div:hover { transform: scale(0.98); border-color: var(--primary); }
+        .gallery-grid img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-grid div:hover img { transform: scale(1.1); }
+
+        /* Specifikáció */
+        .tech-box {
+            background: var(--glass-bg); border-radius: 35px; overflow: hidden;
+            max-width: 850px; margin: 0 auto; border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .tech-box table { width: 100%; border-collapse: collapse; }
+        .tech-box td { padding: 22px 35px; border-bottom: 1px solid var(--glass-border); }
+        .tech-box td:first-child { color: var(--primary); font-weight: 700; width: 45%; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* GYIK - KIEMELÉS ÉS HOVER */
+        .faq-item {
+            margin-bottom: 20px; padding: 30px;
+            background: var(--glass-bg); border-radius: 25px;
+            border: 1px solid var(--glass-border); transition: 0.3s;
+        }
+        .faq-item:hover { 
+            border-color: var(--primary); 
+            background: var(--glass-hover); 
+            transform: scale(1.01);
+        }
+        .faq-item strong { color: var(--primary); display: block; margin-bottom: 12px; font-size: 1.1rem; }
+
+        footer { padding: 80px 5%; text-align: center; border-top: 1px solid var(--glass-border); }
+        footer p.quote { font-style: italic; font-size: 1.1rem; margin-bottom: 20px; color: #fff; }
+        .copyright { color: var(--text-dim); font-size: 0.85rem; margin-top: 25px; opacity: 0.6; }
+
+        /* Mobil Menü */
+        @media (max-width: 950px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 85%;
+                background: rgba(11, 14, 17, 0.98);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-left: 1px solid var(--glass-border);
+                gap: 30px;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1.1rem; }
+            h2.section-title { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-container { padding-top: 100px; }
+            .container { padding: 60px 5%; }
+            .tech-box td { padding: 18px 20px; display: block; width: 100% !important; border-bottom: none; }
+            .tech-box td:first-child { padding-bottom: 5px; opacity: 0.6; }
+            .tech-box tr { border-bottom: 1px solid var(--glass-border); display: block; }
+            .f-card { padding: 35px 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">
+            <img src="favicon.ico" alt="" onerror="this.style.display='none'">
+            Trucky<span>Tool</span>
+        </a>
+        <button class="mobile-menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#funkciok">Funkciók</a></li>
+            <li><a href="#galeria">Képek</a></li>
+            <li><a href="#tech">Specifikáció</a></li>
+            <li><a href="#gyik">GYIK</a></li>
+            <li><a href="https://discord.gg/MEGHIVO_LINK" target="_blank" class="discord-link"><i class="fab fa-discord"></i> Discord</a></li>
+            <li><a href="aszf.html">ÁSZF</a></li>
+            <li><a href="#" class="nav-dl-btn">LETÖLTÉS</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-container">
+        <div class="hero-bg"></div>
+        <header>
+            <div class="hero-badge">Verzió: v1.1.8</div>
+            <h1>Trucky<span>Tool</span></h1>
+            <p>A TruckyTool egy minden az egyben asztali alkalmazás az Euro Truck Simulator 2 játékosai számára, amely egyesíti a precíz fuvarnaplózást, a flottavezetést és az intelligens modkezelést.</p>
+            <a href="https://mega.nz/file/2sJ1BACS#LbjmOoU0dtsF0FI6K1WrDuFLpqI8i4dovKbJ8iz-Zio" target="_blank" class="cta-btn">
+                <i class="fas fa-cloud-download-alt"></i> TruckyTool Letöltés
+            </a>
+        </header>
+    </div>
+
+    <section id="funkciok" class="container">
+        <h2 class="section-title">Főbb funkciók</h2>
+        <div class="grid-features">
+            <div class="f-card">
+                <div class="icon-box"><i class="fas fa-tachometer-alt"></i></div>
+                <h3>Egyszerű és intelligens fuvarrögzítés</h3>
+                <p>A Műszerfalon keresztül villámgyorsan, akár menet közben is hozzáadhatod az új fuvarokat. A letisztult felületnek köszönhetően a rögzítés nem vonja el a figyelmedet az útról.</p>
+            </div>
+            <div class="f-card">
+                <div class="icon-box"><i class="fas fa-truck"></i></div>
+                <h3>Statisztika és Analitika</h3>
+                <p>Itt kelnek életre az adataid. A beépített algoritmus összesíti a megtett kilométereket, az interaktív grafikonok segítségével pedig pontosan láthatod a teljesítményedet.</p>
+            </div>
+            <div class="f-card">
+                <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+                <h3>Fejlett Mod-Menedzser</h3>
+                <p>Felejtsd el a manuális másolgatást! Egykattintásos importálás és egyedi profilok (ProMods, Winter) közötti gyors váltás egyetlen gombnyomással.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="container">
+        <h2 class="section-title">Pillanatképek</h2>
+        <div class="gallery-grid">
+            <div><img src="screen1.png" alt="Screen 1"></div>
+            <div><img src="screen2.png" alt="Screen 2"></div>
+            <div><img src="screen3.png" alt="Screen 3"></div>
+        </div>
+    </section>
+
+    <section id="tech" class="container">
+        <h2 class="section-title">Technikai Specifikációk</h2>
+        <div class="tech-box">
+            <table>
+                <tr><td>Játék</td><td>Euro Truck Simulator 2</td></tr>
+                <tr><td>Platform</td><td>Windows (EXE)</td></tr>
+                <tr><td>Adatimportálás/exportálás</td><td>.txt fájl</td></tr>
+                <tr><td>Telepítés</td><td>Nem szükséges (Portable)</td></tr>
+                <tr><td>Ár</td><td>ingyenes (Teljes hozzáférés)</td></tr>
+                <tr><td>Gépigény</td><td>Nagyon alacsony</td></tr>
+                <tr><td>Internetkapcsolat</td><td>Nem szükséges (Offline)</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="gyik" class="container">
+        <h2 class="section-title">Gyakori Kérdések</h2>
+        <div class="faq-item">
+            <strong>Befolyásolja a program a játék teljesítményét (FPS)?</strong>
+            <p>Nem. A TruckyTool egy külső segédprogram, nem fut a játék motorján belül, így semmilyen erőforrást nem vesz el.</p>
+        </div>
+        <div class="faq-item">
+            <strong>Hol tárolódnak az adataim?</strong>
+            <p>Minden adat helyileg tárolódik a APPDATA/TruckyTool mappában. Biztonságos és privát. (A programból is eltudod érni.)</p>
+        </div>
+        <div class="faq-item">
+            <strong>Miért "fagy le" a program mod-profil váltásakor?</strong>
+            <p>A modok másolása időbe telik. A v1.1.8-as verzió már figyelmeztet, hogy várj türelemmel. Kis várakozás után sikeresen lefut a parancs.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p class="quote">"A TruckyTool nem csak egy segédprogram, hanem a virtuális kamionos karriered digitális központja."</p>
+        <div class="copyright">
+            &copy; 2025-2026 TruckyTool Team. Minden jog fenntartva. | Nem hivatalos kiegészítő szoftver. | By:DaveY971
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+    </script>
+</body>
+</html>
